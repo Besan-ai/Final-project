@@ -1,10 +1,8 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     const ratings = document.querySelectorAll('.rating input');
     const form = document.getElementById('feedback-form');
     const submitButton = document.getElementById('submit-feedback');
     
-    // إضافة مستمع حدث لكل النجوم
     ratings.forEach(rating => {
         rating.addEventListener('change', function() {
             const selectedStars = this.value;
@@ -12,20 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             parentRating.querySelectorAll('label').forEach((label, index) => {
                 if (index < selectedStars) {
-                    label.textContent = '★'; // ملء النجمة
+                    label.textContent = '★'; 
                 } else {
-                    label.textContent = '☆'; // نجمة فارغة
+                    label.textContent = '☆'; 
                 }
             });
         });
     });
 
-    // إرسال التقييم والتحقق من المدخلات
     form.addEventListener('submit', (e) => {
-        e.preventDefault(); // منع إرسال النموذج مباشرة
+        e.preventDefault();
         let valid = true;
         
-        // التحقق من أن المستخدم قد اختار التقييم في كل قسم
         const ratingSections = document.querySelectorAll('.rating');
         ratingSections.forEach((section) => {
             if (!section.querySelector('input:checked')) {
@@ -33,13 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // إذا لم يتم اختيار أي تقييم، إظهار تحذير
         if (!valid) {
             alert('يرجى تقييم جميع الأقسام قبل إرسال التقييم!');
             return;
         }
 
-        // إذا تم التحقق بنجاح، إرسال التقييم (هنا فقط سنعرض التقييم في console)
         const feedbackData = {
             overall: document.querySelector('input[name="overall-rating"]:checked').value,
             food: document.querySelector('input[name="food-rating"]:checked').value,
@@ -51,9 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('تم إرسال التقييم:', feedbackData);
         alert('تم إرسال التقييم بنجاح!');
         
-        // إخفاء النموذج بعد إرسال التقييم
-        form.style.display = 'none'; // إخفاء النموذج
+        form.style.display = 'none'; 
         
-        // يمكنك هنا استبدال الـ console.log و alert بجمع البيانات وإرسالها إلى الخادم باستخدام AJAX أو Fetch.
     });
 });
